@@ -1,4 +1,4 @@
-alphabet = "abcdefghijklmnopqrstuvwxyz".upper()
+alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ_"
 shift = 3
 
 
@@ -16,9 +16,12 @@ def decrypt(text: str) -> str:
 
 
 if __name__ == "__main__":
-    M = "CAESAR"
-    C = encrypt(M)
-    print("M =", M)
-    print("C = E(M) =", C)
-    print("M = D(C) =", decrypt(C))
+    # M = "CAESAR"
+    # C = encrypt(M)
+    # print("M =", M)
+    # print("C = E(M) =", C)
+    # print("M = D(C) =", decrypt(C))
 
+    text = open("input/map_input.txt", encoding="utf-8").read().replace("\n", "")
+    for shift in range(1, len(alphabet)):
+        print(decrypt(text))
