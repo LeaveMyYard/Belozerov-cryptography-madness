@@ -1,4 +1,6 @@
 import collections
+import random
+import copy
 
 alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ_"
 
@@ -25,10 +27,37 @@ def decrypt(text: str, mapping: dict[str, str]) -> str:
     return "".join(mapping[letter] if letter in mapping else " " for letter in text)
 
 
+text = (
+    open("letter_counting/bulgakov.txt", encoding="utf-8")
+    .read()
+    .replace("\n", " ")
+    .replace(" ", "_")
+    .upper()
+)
+res = analyze_repeats(text, 1)
+stats = sorted(
+    filter(lambda x: all(y in alphabet for y in x[0]), res.items()),
+    key=lambda x: x[1],
+    reverse=True,
+)
+stats = {stat[0]: i for i, stat in enumerate(stats)}
+
+
+def calc_index(text) -> int:
+    data = analyze_repeats(text, 1)
+    rp = [x for x, _ in sorted(data.items(), reverse=True, key=lambda x: x[1])]
+    return sum(
+        ((i - stats[letter]) ** 2) if letter in stats else 10000
+        for i, letter in enumerate(rp)
+    )
+
+
 if __name__ == "__main__":
     text = open("input/map_input.txt", encoding="utf-8").read().replace("\n", "")
     res = analyze_repeats(text, 1)
-    print(sorted(res.items(), key=lambda x: x[1], reverse=True))
+
+    stats = dict(sorted(res.items(), key=lambda x: x[1], reverse=True))
+    print(stats)
 
     # res = analyze_repeats(text, 2)
     # print(sorted(res.items(), key=lambda x: x[1], reverse=True))
@@ -36,12 +65,50 @@ if __name__ == "__main__":
     # most_repeated_letters = "_ОЕАИН"
 
     change = {
-        "Е": "_",
-        "К": "О",
-        "Б": "Е",
-        "Ю": "А",
+        "Е": "_",  # !
+        "К": "О",  # !
+        "Г": "Т",
+        "Ю": "В",
+        "Б": "Е",  # !
+        "Э": "C",
+        "Ф": "Н",
+        "А": "И",
+        "Ы": "Б",
+        "П": "Щ",
+        "Х": "Г",
+        "Д": "А",
+        "С": "Л",
+        "Ж": "П",
+        "Л": "К",
+        "Я": "У",
+        "Р": "Ш",
+        "Ш": "Р",
+        "_": "Ц",
+        "Ъ": "Д",
+        "В": "Я",
+        "О": "Ь",
+        "Ч": "Й",
+        "Щ": "М",
+        "Ь": "Ю",
     }
 
-    print(analyze_change(change))
+    # for i in range(300):
+    #     index = calc_index(decrypt(text, change))
+    #     new_change = change
+    #     while (new_index := calc_index(decrypt(text, new_change))) >= index:
+    #         new_change = change.copy()
+    #         rand_letter1, rand_letter2 = alphabet[random.randint(0, len(alphabet)-1)], alphabet[random.randint(0, len(alphabet)-1)]
+    #         new_change[rand_letter1], new_change[rand_letter2] = new_change[rand_letter2], new_change[rand_letter1]
 
-    print(decrypt(text, change))
+    #     change = new_change
+    #     index = new_index
+    #     print(i, index)
+    #     print(change)
+    #     print(decrypt(text, change))
+    #     print(text)
+
+    # print(analyze_change(change))
+    # print(change)
+    print()
+    print(decrypt(text, change).replace("_", "*").replace(" ", "_").replace("*", " "))
+    print(text)
