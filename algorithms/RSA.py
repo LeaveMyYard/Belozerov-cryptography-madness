@@ -1,4 +1,4 @@
-import numpy as np
+# import numpy as np
 import math
 
 alphabet = [
@@ -112,4 +112,3 @@ RSA(
     868121,
     4,
 )
-
