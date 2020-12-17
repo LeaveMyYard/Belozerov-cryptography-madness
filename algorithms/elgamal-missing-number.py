@@ -33,43 +33,39 @@ print(len(alphabet))
 
 
 if __name__ == "__main__":
-    for kq in range(10):
-        for qk in range(10):
-            try:
-                C = ("15*27558200262300592658").replace("*", str(kq) + str(qk))
-                # print(C)
-                p = 89
-                g = 3
-                h = 66
-                block_length = 2
-                # print(list(factors(len(C))))
-                a = bsgs(h, g, p)
-                # print("a =", a)
+    C = "15*27558200262300592658"
+    # print(C)
+    p = 89
+    g = 3
+    h = 66
+    block_length = 2
+    # print(list(factors(len(C))))
+    a = bsgs(h, g, p)
+    # print("a =", a)
 
-                c1, *c2 = [
-                    int(str(C)[i - block_length : i])
-                    for i in range(block_length, len(str(C)) + 1, block_length)
-                ]
+    c1 = int(C.split("*")[0])
+    c2_text = C.split("*")[1]
 
-                # c1, *c2 = [int(c) for c in C.split()]
+    c2 = [
+        int(c2_text[i - block_length : i])
+        for i in range(block_length, len(c2_text) + 1, block_length)
+    ]
 
-                # print("C_1 =", c1)
-                # print("C_2 =", c2)
+    # c1, *c2 = [int(c) for c in C.split()]
 
-                M = [(m * pow(c1, -1 * a, p)) % p for m in c2]
+    # print("C_1 =", c1)
+    # print("C_2 =", c2)
 
-                text = "".join(str(m).rjust(block_length, "0") for m in M)
+    M = [(m * pow(c1, -1 * a, p)) % p for m in c2]
 
-                # print(M)
-                # print("text =", text)
-                # print("length(text) =", len(text))
+    text = "".join(str(m).rjust(block_length, "0") for m in M)
 
-                s = ""
-                for i in range(0, len(text), 2):
-                    s += alphabet[int(text[i : i + 2]) % len(alphabet)]
+    # print(M)
+    # print("text =", text)
+    # print("length(text) =", len(text))
 
-                print(kq, qk)
-                print(s)
-                print("=" * 20)
-            except:
-                continue
+    s = ""
+    for i in range(0, len(text), 2):
+        s += alphabet[int(text[i : i + 2]) % len(alphabet)]
+
+    print(s)

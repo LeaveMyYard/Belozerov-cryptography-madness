@@ -26,3 +26,6 @@ def bsgs(x, g, p):
 
     # Solution not found
     return None
+
+
+print(bsgs(31, 5, 167))

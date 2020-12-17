@@ -4,6 +4,7 @@ import collections
 
 alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ_"
 
+
 def analyze_repeats(text, length=1) -> collections.defaultdict[str, int]:
     letters = collections.defaultdict(lambda: 0)
     text_size = len(text)
@@ -23,5 +24,11 @@ if __name__ == "__main__":
         .replace(" ", "_")
         .upper()
     )
-    res = analyze_repeats(text, 1)
-    print(sorted(filter(lambda x: all(y in alphabet for y in x[0]), res.items()), key=lambda x: x[1], reverse=True))
+    res = analyze_repeats(text, 5)
+    print(
+        sorted(
+            filter(lambda x: all(y in alphabet for y in x[0]), res.items()),
+            key=lambda x: x[1],
+            reverse=True,
+        )
+    )
