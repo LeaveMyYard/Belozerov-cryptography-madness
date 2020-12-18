@@ -15,12 +15,15 @@ def bsgs(x, g, p):
     # Store hashmap of g^{1...m} (mod p). Baby step.
     tbl = {pow(g, i, p): i for i in range(N)}
 
+    print(tbl)
+
     # Precompute via Fermat's Little Theorem
     c = pow(g, N * (p - 2), p)
 
     # Search for an equivalence in the table. Giant step.
     for j in range(N):
         y = (x * pow(c, j, p)) % p
+        print(j, y)
         if y in tbl:
             return j * N + tbl[y]
 
@@ -28,4 +31,6 @@ def bsgs(x, g, p):
     return None
 
 
-print(bsgs(31, 5, 167))
+print(bsgs(18, 2, 101))
+
+print(pow(2, 39, 101))

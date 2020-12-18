@@ -52,6 +52,35 @@ def calc_index(text) -> int:
     )
 
 
+# fmt: off
+square = [ 
+    "ABCDE",
+    "FGHIK",
+    "LMNOP",
+    "QRSTU",
+    "VWXYZ"
+]
+# fmt: on
+
+
+def encrypt(text: str) -> str:
+    return "".join(
+        [
+            f"{i + 1}{line.index(letter) + 1}"
+            for i, line in enumerate(square)
+            if letter in line
+        ][0]
+        for letter in text.replace("J", "I")
+    )
+
+
+def decrypt(encrypted_text: str) -> str:
+    return "".join(
+        square[int(i) - 1][int(j) - 1]
+        for i, j in zip(encrypted_text[::2], encrypted_text[1::2])
+    )
+
+
 if __name__ == "__main__":
     text = open("input/map_input.txt", encoding="utf-8").read().replace("\n", "")
     text = [i + j for i, j in zip(text[::2], text[1::2])]

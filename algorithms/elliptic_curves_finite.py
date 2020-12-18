@@ -65,21 +65,24 @@ def curve_order(curve: Curve) -> int:
             if pow(y, 2, p) == r:
                 points.add((x, y))
 
-    return len(points)
+    return points
 
 
 def point_order(P: Point, curve: Curve) -> int:
     i = 2
     while True:
+        print(i, mult(i, P, curve))
         if mult(i, P, curve) == 0:
             return i
         i += 1
 
 
 if __name__ == "__main__":
-    curve = (2, 3, 97)
-    P = (3, 6)
-    print(point_order(P, curve))
+    curve = (6, 9, 19)
+    P = (3, 4)
+    Q = (1, 4)
+    # print(curve_order(curve))
+    # print(point_order(P, curve))
 
     # print("2 *", P, "=", P2)
-    # print(add(p2, P, curve))
+    print(point_order(Q, curve))

@@ -26,6 +26,7 @@ def bsgs(x, g, p):
 def sign(m: int, p: int, g: int, a: int) -> int:
     try:
         r = random.randint(1, p - 1)
+        print("r =", r)
         s1 = pow(g, r, p)
         rp = pow(r, -1, p - 1)
         s2 = ((m - a * s1) * rp) % (p - 1)
@@ -35,6 +36,7 @@ def sign(m: int, p: int, g: int, a: int) -> int:
 
 
 def check(m, s1, s2, p, g, h) -> bool:
+    print(pow(g, m, p), (pow(h, s1, p) * pow(s1, s2, p)) % p)
     return pow(g, m, p) == (pow(h, s1, p) * pow(s1, s2, p)) % p
 
 
@@ -42,14 +44,16 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_,."
 
 
 if __name__ == "__main__":
-    p = 89981741
+    p = 541
     g = 2
-    h = 76976449
+    h = 378
     a = bsgs(h, g, p)
+    print(a)
 
-    m = 121312
+    m = 101418
 
-    s1, s2 = sign(m, p, g, a)
-    print(s1, s2)
+    # s1, s2 = sign(m, p, g, a)
+    # print(s1, s2)
+    s1, s2 = (487, 287)
 
     print(check(m, s1, s2, p, g, h))

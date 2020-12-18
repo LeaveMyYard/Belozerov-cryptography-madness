@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import collections
 
-alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ_"
+alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ_.,?"
 
 
 def analyze_repeats(text, length=1) -> collections.defaultdict[str, int]:
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         .replace(" ", "_")
         .upper()
     )
-    res = analyze_repeats(text, 5)
+    res = analyze_repeats(text, 1)
     print(
         sorted(
             filter(lambda x: all(y in alphabet for y in x[0]), res.items()),

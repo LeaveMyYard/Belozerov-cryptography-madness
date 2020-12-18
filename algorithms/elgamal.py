@@ -32,25 +32,20 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_,."
 
 
 if __name__ == "__main__":
-    C = (
-        "5148154611033774886049492438"
-        "29400838337287285350106766014"
-        "7906401592062201450665781876473"
-    )
-    p = 89981741
-    g = 2
-    h = 76976449
-    block_length = 8
-    print(list(factors(len(C))))
+    C = "15 27 55 82 00 26 23 00 59 26 58"
+    p = 89
+    g = 3
+    h = 66
+    block_length = 2
     a = bsgs(h, g, p)
     print("a =", a)
 
-    c1, *c2 = [
-        int(str(C)[i - block_length : i])
-        for i in range(block_length, len(str(C)) + 1, block_length)
-    ]
+    # c1, *c2 = [
+    #     int(str(C)[i - block_length : i])
+    #     for i in range(block_length, len(str(C)) + 1, block_length)
+    # ]
 
-    # c1, *c2 = [int(c) for c in C.split()]
+    c1, *c2 = [int(c) for c in C.split()]
 
     print("C_1 =", c1)
     print("C_2 =", c2)

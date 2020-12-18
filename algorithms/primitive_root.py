@@ -14,6 +14,7 @@ def Factor(n):
 
 def primitive_root(p: int) -> int:
     factors = set(Factor(p - 1))
+    print(Factor(p - 1))
 
     for g in range(1, p):
         if all(pow(g, (p - 1) // q, p) != 1 for q in factors):
@@ -23,4 +24,4 @@ def primitive_root(p: int) -> int:
 
 
 if __name__ == "__main__":
-    print(primitive_root(1931))
+    print(primitive_root(919))
