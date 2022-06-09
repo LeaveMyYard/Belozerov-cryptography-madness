@@ -13,6 +13,7 @@ using namespace std;
 
 //Нахождение ключ-слова для сообщения частотным методом
 
+
 int main() {
 
     setlocale(LC_ALL, "Russian");
