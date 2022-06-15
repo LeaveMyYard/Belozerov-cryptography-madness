@@ -7,6 +7,7 @@ message strM and its encrypted form strC
 
 
 import numpy as np
+from sympy import Matrix
 
 alphabet = ['А','Б','В','Г','Д','Е',
         'Ж','З','И','Й','К','Л',
@@ -54,8 +55,9 @@ for i in range(n):
 print("X substractive: \n",np.array(XX).T)
 print("Y substractive: \n",np.array(YY).T)
 
-# find the inverse modulo matrix on the calculator manually
-XX_1=[[23, 35],[14,14]]
+# finded the inverse modulo matrix on the calculator manually
+# XX_1=[[23, 35],[14,14]]
+XX_1=Matrix.inv_mod(Matrix(XX),len(alphabet)).T
 
 # A=Y*np.linalg.inv(X) mod p
 A=(np.matrix(YY).T@np.matrix(XX_1))%p
@@ -63,8 +65,9 @@ S=(Y[n]-A@X[n])%p
 print("A: ",A)
 print("S: ",S)
 
-# find the inverse modulo matrix on the calculator manually
-A_1=[[22,31],[21,32]]
+# finded the inverse modulo matrix on the calculator manually
+# A_1=[[22,31],[21,32]]
+A_1=Matrix.inv_mod(Matrix(A),len(alphabet))
 S_1=((-1)*(A_1@(np.matrix(S).T)))%p
 print("A_1: ",A_1)
 print("S_1: \n",S_1)
